@@ -1,15 +1,16 @@
 /* Papers-inspired chips for Zotero's library tag selector (bottom-left pane). */
 #zotero-tag-selector .tag-selector-list .tag-selector-item {
   background-color: transparent !important;
-  border-radius: 6px;
+  border-radius: 3px;
   isolation: isolate;
+  padding-inline: 5px;
   transition:
     box-shadow 120ms ease;
 }
 
 #zotero-tag-selector .tag-selector-list .tag-selector-item::after {
   background-color: #e1e6ea;
-  border-radius: 6px;
+  border-radius: 3px;
   content: "";
   inset: 1.5px 2px;
   position: absolute;

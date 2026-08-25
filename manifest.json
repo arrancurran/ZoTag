@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "ZoTag",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Styles Zotero item tags as clean, shaded chips.",
   "homepage_url": "https://github.com/arrancurran/ZoTag",
   "applications": {
