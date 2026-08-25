@@ -1,5 +1,5 @@
 NAME := zotag
-VERSION := 1.0.3
+VERSION := 1.0.4
 XPI := dist/$(NAME)-$(VERSION).xpi
 FILES := manifest.json bootstrap.js zotag.js zotag.css icons LICENSE README.md
 
