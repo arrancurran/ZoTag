@@ -15,7 +15,7 @@ tags-box .body .tags-box-list {
 
 tags-box .body .row {
   align-items: center;
-  background-color: #067cdc !important;
+  background: transparent !important;
   border: 1px solid transparent;
   border-radius: 8px;
   box-sizing: border-box;
@@ -24,44 +24,46 @@ tags-box .body .row {
   grid-template-columns: minmax(0, max-content) 18px;
   max-width: 100%;
   min-height: 30px;
-  padding: 3px 3px 3px 9px;
+  padding: 0;
   width: max-content;
-}
-
-tags-box .body .row {
-  transition: background-color 120ms ease;
-}
-
-tags-box .body .row:is(:hover, :focus-within) {
-  background-color: #d2d9df !important;
-}
-
-tags-box .body .row:active {
-  background-color: #c8d0d7 !important;
-}
-
-@media (prefers-color-scheme: dark) {
-  tags-box .body .row {
-    background-color: #3b4147 !important;
-  }
-
-  tags-box .body .row:is(:hover, :focus-within) {
-    background-color: #4a525a !important;
-  }
-
-  tags-box .body .row:active {
-    background-color: #565f68 !important;
-  }
 }
 
 tags-box .body .row .zotero-box-icon {
   display: none;
 }
 
-tags-box .body .row .zotero-box-label {
+/* Zotero paints editable-text itself, so use it as the visible chip surface. */
+tags-box #rows > .row > .zotero-box-label {
+  background-color: #e1e6ea !important;
+  border-radius: 8px;
+  box-sizing: border-box;
   grid-column: 1;
   max-width: 240px;
   min-width: 0;
+  padding: 3px 9px;
+  transition: background-color 120ms ease;
+}
+
+tags-box #rows > .row:is(:hover, :focus-within) > .zotero-box-label {
+  background-color: #d2d9df !important;
+}
+
+tags-box #rows > .row:active > .zotero-box-label {
+  background-color: #c8d0d7 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  tags-box #rows > .row > .zotero-box-label {
+    background-color: #3b4147 !important;
+  }
+
+  tags-box #rows > .row:is(:hover, :focus-within) > .zotero-box-label {
+    background-color: #4a525a !important;
+  }
+
+  tags-box #rows > .row:active > .zotero-box-label {
+    background-color: #565f68 !important;
+  }
 }
 
 tags-box .body .row toolbarbutton {
@@ -75,7 +77,6 @@ tags-box .body .row toolbarbutton {
 /* Preserve Zotero tag colors as a quiet dot without the original tag glyph. */
 tags-box .body .row.has-color {
   grid-template-columns: 8px minmax(0, max-content) 18px;
-  padding-inline-start: 8px;
 }
 
 tags-box .body .row.has-color .zotero-box-icon {
@@ -98,7 +99,6 @@ tags-box .body .row.has-color toolbarbutton {
 /* Read-only panes do not need to reserve space for a remove button. */
 tags-box[readonly] .body .row {
   grid-template-columns: minmax(0, max-content);
-  padding-inline: 10px;
 }
 
 tags-box[readonly] .body .row.has-color {
@@ -112,6 +112,10 @@ tags-box .body .row[isNew] {
 }
 
 tags-box .body .row[isNew] {
+  background: transparent !important;
+}
+
+tags-box #rows > .row[isNew] > .zotero-box-label {
   background-color: var(--material-background, #fff) !important;
 }
 

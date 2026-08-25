@@ -23,7 +23,7 @@ test("injects one scoped stylesheet and removes it cleanly", () => {
     }
   };
   const window = { document };
-  ZoTag.init({ rootURI: "file:///zotag/", version: "1.0.5" });
+  ZoTag.init({ rootURI: "file:///zotag/", version: "1.0.6" });
   ZoTag.addToWindow(window);
   ZoTag.addToWindow(window);
 
@@ -31,7 +31,7 @@ test("injects one scoped stylesheet and removes it cleanly", () => {
   const stylesheet = nodes.get("zotag-chip-styles");
   assert.equal(stylesheet.tag, "link");
   assert.equal(stylesheet.rel, "stylesheet");
-  assert.equal(stylesheet.href, "file:///zotag/zotag.css?v=1.0.5");
+  assert.equal(stylesheet.href, "file:///zotag/zotag.css?v=1.0.6");
 
   ZoTag.removeFromWindow(window);
   assert.equal(nodes.size, 0);
@@ -50,15 +50,15 @@ test("styles tag rows as spaced, wrapping chips", () => {
   assert.match(css, /tags-box \.body \.tags-box-list\s*\{[^}]*flex-wrap:\s*wrap/s);
   assert.match(css, /tags-box \.body \.tags-box-list\s*\{[^}]*gap:\s*8px/s);
   assert.match(css, /tags-box \.body \.row\s*\{[^}]*border-radius:\s*8px/s);
-  assert.match(css, /tags-box \.body \.row\s*\{[^}]*background-color:\s*#067cdc\s*!important/s);
+  assert.match(css, /tags-box #rows > \.row > \.zotero-box-label\s*\{[^}]*background-color:\s*#e1e6ea\s*!important/s);
 });
 
 test("darkens chips on hover and preserves colored-tag identity", () => {
   const css = fs.readFileSync("zotag.css", "utf8");
-  assert.match(css, /\.row\s*\{[^}]*background-color:\s*#067cdc\s*!important/s);
-  assert.match(css, /\.row:is\(:hover, :focus-within\)\s*\{[^}]*background-color:\s*#d2d9df\s*!important/s);
+  assert.match(css, /\.row > \.zotero-box-label\s*\{[^}]*background-color:\s*#e1e6ea\s*!important/s);
+  assert.match(css, /\.row:is\(:hover, :focus-within\) > \.zotero-box-label\s*\{[^}]*background-color:\s*#d2d9df\s*!important/s);
   assert.match(css, /prefers-color-scheme:\s*dark/);
-  assert.match(css, /\.row\s*\{[^}]*transition:\s*background-color 120ms ease/s);
+  assert.match(css, /\.zotero-box-label\s*\{[^}]*transition:\s*background-color 120ms ease/s);
   assert.match(css, /\.row\.has-color \.zotero-box-icon\s*\{[^}]*background:\s*var\(--tag-color\)/s);
 });
 
