@@ -23,7 +23,7 @@ test("injects one scoped stylesheet and removes it cleanly", () => {
     }
   };
   const window = { document };
-  ZoTag.init({ rootURI: "file:///zotag/", version: "1.0.6" });
+  ZoTag.init({ rootURI: "file:///zotag/", version: "1.0.7" });
   ZoTag.addToWindow(window);
   ZoTag.addToWindow(window);
 
@@ -31,7 +31,7 @@ test("injects one scoped stylesheet and removes it cleanly", () => {
   const stylesheet = nodes.get("zotag-chip-styles");
   assert.equal(stylesheet.tag, "link");
   assert.equal(stylesheet.rel, "stylesheet");
-  assert.equal(stylesheet.href, "file:///zotag/zotag.css?v=1.0.6");
+  assert.equal(stylesheet.href, "file:///zotag/zotag.css?v=1.0.7");
 
   ZoTag.removeFromWindow(window);
   assert.equal(nodes.size, 0);
@@ -45,27 +45,27 @@ test("cache-busts the stylesheet URL with the installed version", () => {
   assert.match(script, /zotag\.css\?v=/);
 });
 
-test("styles tag rows as spaced, wrapping chips", () => {
+test("styles the library tag selector as shaded chips", () => {
   const css = fs.readFileSync("zotag.css", "utf8");
-  assert.match(css, /tags-box \.body \.tags-box-list\s*\{[^}]*flex-wrap:\s*wrap/s);
-  assert.match(css, /tags-box \.body \.tags-box-list\s*\{[^}]*gap:\s*8px/s);
-  assert.match(css, /tags-box \.body \.row\s*\{[^}]*border-radius:\s*8px/s);
-  assert.match(css, /tags-box #rows > \.row > \.zotero-box-label\s*\{[^}]*background-color:\s*#e1e6ea\s*!important/s);
+  assert.match(css, /#zotero-tag-selector \.tag-selector-list \.tag-selector-item\s*\{/);
+  assert.match(css, /\.tag-selector-item\s*\{[^}]*background-color:\s*#e1e6ea\s*!important/s);
+  assert.match(css, /\.tag-selector-item\s*\{[^}]*border-radius:\s*7px/s);
+  assert.doesNotMatch(css, /tags-box|\.zotero-box-label/);
 });
 
 test("darkens chips on hover and preserves colored-tag identity", () => {
   const css = fs.readFileSync("zotag.css", "utf8");
-  assert.match(css, /\.row > \.zotero-box-label\s*\{[^}]*background-color:\s*#e1e6ea\s*!important/s);
-  assert.match(css, /\.row:is\(:hover, :focus-within\) > \.zotero-box-label\s*\{[^}]*background-color:\s*#d2d9df\s*!important/s);
+  assert.match(css, /\.tag-selector-item:hover:not\(\.disabled\)\s*\{[^}]*background-color:\s*#d2d9df\s*!important/s);
+  assert.match(css, /\.tag-selector-item\.selected\s*\{[^}]*background-color:/s);
   assert.match(css, /prefers-color-scheme:\s*dark/);
-  assert.match(css, /\.zotero-box-label\s*\{[^}]*transition:\s*background-color 120ms ease/s);
-  assert.match(css, /\.row\.has-color \.zotero-box-icon\s*\{[^}]*background:\s*var\(--tag-color\)/s);
+  assert.doesNotMatch(css, /\.colored[^}]*display:\s*none/s);
 });
 
-test("targets Zotero 10 tag markup without changing tag data", () => {
+test("targets Zotero 10 library tag-selector markup without changing tag data", () => {
   const css = fs.readFileSync("zotag.css", "utf8");
   const script = fs.readFileSync("zotag.js", "utf8");
-  assert.match(css, /tags-box \.body \.row/);
-  assert.match(css, /\.zotero-box-label/);
+  assert.match(css, /#zotero-tag-selector/);
+  assert.match(css, /\.tag-selector-list/);
+  assert.match(css, /\.tag-selector-item/);
   assert.doesNotMatch(script, /getTags|setTags|addTag|removeTag/);
 });

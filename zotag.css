@@ -1,129 +1,56 @@
-/* Papers-inspired tag chips for Zotero's item-pane Tags section. */
-tags-box .body {
-  padding-block: 4px 8px;
-  padding-inline-start: 12px;
-}
-
-tags-box .body .tags-box-list {
-  align-content: flex-start;
-  align-items: flex-start;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-tags-box .body .row {
-  align-items: center;
-  background: transparent !important;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  box-sizing: border-box;
-  column-gap: 4px;
-  display: grid;
-  grid-template-columns: minmax(0, max-content) 18px;
-  max-width: 100%;
-  min-height: 30px;
-  padding: 0;
-  width: max-content;
-}
-
-tags-box .body .row .zotero-box-icon {
-  display: none;
-}
-
-/* Zotero paints editable-text itself, so use it as the visible chip surface. */
-tags-box #rows > .row > .zotero-box-label {
+/* Papers-inspired chips for Zotero's library tag selector (bottom-left pane). */
+#zotero-tag-selector .tag-selector-list .tag-selector-item {
   background-color: #e1e6ea !important;
-  border-radius: 8px;
-  box-sizing: border-box;
-  grid-column: 1;
-  max-width: 240px;
-  min-width: 0;
-  padding: 3px 9px;
-  transition: background-color 120ms ease;
+  border-radius: 7px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.015);
+  transition:
+    background-color 120ms ease,
+    box-shadow 120ms ease;
 }
 
-tags-box #rows > .row:is(:hover, :focus-within) > .zotero-box-label {
+#zotero-tag-selector .tag-selector-list .tag-selector-item:hover:not(.disabled) {
   background-color: #d2d9df !important;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.035);
 }
 
-tags-box #rows > .row:active > .zotero-box-label {
+#zotero-tag-selector .tag-selector-list .tag-selector-item:active:not(.disabled) {
   background-color: #c8d0d7 !important;
 }
 
+/* Keep selected filters clear without replacing a tag's colored identity dot. */
+#zotero-tag-selector .tag-selector-list .tag-selector-item.selected {
+  background-color: #b7c1c9 !important;
+  color: var(--fill-primary) !important;
+}
+
+#zotero-tag-selector .tag-selector-list .tag-selector-item.selected:hover {
+  background-color: #aab5be !important;
+  opacity: 1;
+}
+
+#zotero-tag-selector .tag-selector-list .tag-selector-item.disabled {
+  opacity: 0.55;
+}
+
 @media (prefers-color-scheme: dark) {
-  tags-box #rows > .row > .zotero-box-label {
+  #zotero-tag-selector .tag-selector-list .tag-selector-item {
     background-color: #3b4147 !important;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.025);
   }
 
-  tags-box #rows > .row:is(:hover, :focus-within) > .zotero-box-label {
+  #zotero-tag-selector .tag-selector-list .tag-selector-item:hover:not(.disabled) {
     background-color: #4a525a !important;
   }
 
-  tags-box #rows > .row:active > .zotero-box-label {
+  #zotero-tag-selector .tag-selector-list .tag-selector-item:active:not(.disabled) {
     background-color: #565f68 !important;
   }
-}
 
-tags-box .body .row toolbarbutton {
-  grid-column: 2;
-  height: 18px;
-  margin: 0;
-  padding: 1px;
-  width: 18px;
-}
+  #zotero-tag-selector .tag-selector-list .tag-selector-item.selected {
+    background-color: #626d77 !important;
+  }
 
-/* Preserve Zotero tag colors as a quiet dot without the original tag glyph. */
-tags-box .body .row.has-color {
-  grid-template-columns: 8px minmax(0, max-content) 18px;
-}
-
-tags-box .body .row.has-color .zotero-box-icon {
-  background: var(--tag-color) !important;
-  border-radius: 50%;
-  display: block;
-  grid-column: 1;
-  height: 8px;
-  width: 8px;
-}
-
-tags-box .body .row.has-color .zotero-box-label {
-  grid-column: 2;
-}
-
-tags-box .body .row.has-color toolbarbutton {
-  grid-column: 3;
-}
-
-/* Read-only panes do not need to reserve space for a remove button. */
-tags-box[readonly] .body .row {
-  grid-template-columns: minmax(0, max-content);
-}
-
-tags-box[readonly] .body .row.has-color {
-  grid-template-columns: 8px minmax(0, max-content);
-}
-
-/* Keep the temporary editor roomy and visually distinct when adding a tag. */
-tags-box .body .row[isNew] {
-  border-color: var(--color-border50, var(--fill-quarternary));
-  min-width: 140px;
-}
-
-tags-box .body .row[isNew] {
-  background: transparent !important;
-}
-
-tags-box #rows > .row[isNew] > .zotero-box-label {
-  background-color: var(--material-background, #fff) !important;
-}
-
-tags-box .body .row.multiline {
-  width: 100%;
-}
-
-[zoteroUIDensity="comfortable"] tags-box .body .row {
-  min-height: 34px;
-  padding-block: 5px;
+  #zotero-tag-selector .tag-selector-list .tag-selector-item.selected:hover {
+    background-color: #707c87 !important;
+  }
 }

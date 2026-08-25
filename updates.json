@@ -3,9 +3,9 @@
     "zotag@arrancurran.github.io": {
       "updates": [
         {
-          "version": "1.0.6",
-          "update_link": "https://github.com/arrancurran/ZoTag/releases/download/v1.0.6/zotag-1.0.6.xpi",
-          "update_hash": "sha256:2f80294faf329fd0174cfaa6581b6412eb8293a3cf01960232f8fc2fcc2c9921",
+          "version": "1.0.7",
+          "update_link": "https://github.com/arrancurran/ZoTag/releases/download/v1.0.7/zotag-1.0.7.xpi",
+          "update_hash": "sha256:1ccd0a172da07f5662c68a0429025cecb2ff0c1d609b3a4824c9c20f4d57ea97",
           "applications": {
             "zotero": {
               "strict_min_version": "7.0",
