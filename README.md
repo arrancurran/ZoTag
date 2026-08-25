@@ -15,7 +15,7 @@ by the tag presentation in Papers.
 
 ## Install
 
-1. Build the package with `make` or download `zotag-1.0.4.xpi`.
+1. Build the package with `make` or download `zotag-1.0.5.xpi`.
 2. In Zotero, open **Tools → Plugins**.
 3. Choose **Install Plugin From File…** from the gear menu.
 4. Select the `.xpi` file.
@@ -29,7 +29,7 @@ make test
 make package
 ```
 
-The package is written to `dist/zotag-1.0.4.xpi`.
+The package is written to `dist/zotag-1.0.5.xpi`.
 
 ## Privacy
 
