@@ -47,8 +47,11 @@ test("styles tag rows as spaced, wrapping chips", () => {
 
 test("darkens chips on hover and preserves colored-tag identity", () => {
   const css = fs.readFileSync("zotag.css", "utf8");
-  assert.match(css, /\.row:is\(:hover, :focus-within\)\s*\{[^}]*color-quarternary-on-sidepane/s);
-  assert.match(css, /\.row\s*\{[^}]*color-quinary-on-sidepane/s);
+  assert.match(css, /--zotag-chip-background:\s*#e1e6ea/);
+  assert.match(css, /--zotag-chip-hover-background:\s*#d2d9df/);
+  assert.match(css, /prefers-color-scheme:\s*dark/);
+  assert.match(css, /\.row:is\(:hover, :focus-within\)\s*\{[^}]*var\(--zotag-chip-hover-background\)\s*!important/s);
+  assert.match(css, /\.row\s*\{[^}]*var\(--zotag-chip-background\)\s*!important/s);
   assert.match(css, /\.row\s*\{[^}]*transition:\s*background-color 120ms ease/s);
   assert.match(css, /\.row\.has-color \.zotero-box-icon\s*\{[^}]*background:\s*var\(--tag-color\)/s);
 });

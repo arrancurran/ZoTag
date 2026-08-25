@@ -1,4 +1,18 @@
 /* Papers-inspired tag chips for Zotero's item-pane Tags section. */
+tags-box {
+  --zotag-chip-background: #e1e6ea;
+  --zotag-chip-hover-background: #d2d9df;
+  --zotag-chip-active-background: #c8d0d7;
+}
+
+@media (prefers-color-scheme: dark) {
+  tags-box {
+    --zotag-chip-background: #3b4147;
+    --zotag-chip-hover-background: #4a525a;
+    --zotag-chip-active-background: #565f68;
+  }
+}
+
 tags-box .body {
   padding-block: 4px 8px;
   padding-inline-start: 12px;
@@ -15,7 +29,7 @@ tags-box .body .tags-box-list {
 
 tags-box .body .row {
   align-items: center;
-  background-color: var(--color-quinary-on-sidepane, var(--fill-quinary));
+  background-color: var(--zotag-chip-background) !important;
   border: 1px solid transparent;
   border-radius: 8px;
   box-sizing: border-box;
@@ -30,7 +44,11 @@ tags-box .body .row {
 }
 
 tags-box .body .row:is(:hover, :focus-within) {
-  background-color: var(--color-quarternary-on-sidepane, var(--fill-quarternary));
+  background-color: var(--zotag-chip-hover-background) !important;
+}
+
+tags-box .body .row:active {
+  background-color: var(--zotag-chip-active-background) !important;
 }
 
 tags-box .body .row .zotero-box-icon {
@@ -86,7 +104,7 @@ tags-box[readonly] .body .row.has-color {
 
 /* Keep the temporary editor roomy and visually distinct when adding a tag. */
 tags-box .body .row[isNew] {
-  background-color: var(--material-background);
+  background-color: var(--material-background) !important;
   border-color: var(--color-border50, var(--fill-quarternary));
   min-width: 140px;
 }
