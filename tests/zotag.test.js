@@ -23,7 +23,7 @@ test("injects one scoped stylesheet and removes it cleanly", () => {
     }
   };
   const window = { document };
-  ZoTag.init({ rootURI: "file:///zotag/", version: "1.0.8" });
+  ZoTag.init({ rootURI: "file:///zotag/", version: "1.0.9" });
   ZoTag.addToWindow(window);
   ZoTag.addToWindow(window);
 
@@ -31,7 +31,7 @@ test("injects one scoped stylesheet and removes it cleanly", () => {
   const stylesheet = nodes.get("zotag-chip-styles");
   assert.equal(stylesheet.tag, "link");
   assert.equal(stylesheet.rel, "stylesheet");
-  assert.equal(stylesheet.href, "file:///zotag/zotag.css?v=1.0.8");
+  assert.equal(stylesheet.href, "file:///zotag/zotag.css?v=1.0.9");
 
   ZoTag.removeFromWindow(window);
   assert.equal(nodes.size, 0);
@@ -49,8 +49,8 @@ test("styles the library tag selector as shaded chips", () => {
   const css = fs.readFileSync("zotag.css", "utf8");
   assert.match(css, /#zotero-tag-selector \.tag-selector-list \.tag-selector-item\s*\{/);
   assert.match(css, /\.tag-selector-item::after\s*\{[^}]*background-color:\s*#e1e6ea/s);
-  assert.match(css, /\.tag-selector-item\s*\{[^}]*border-radius:\s*7px/s);
-  assert.match(css, /\.tag-selector-item::after\s*\{[^}]*inset:\s*1px 2px/s);
+  assert.match(css, /\.tag-selector-item\s*\{[^}]*border-radius:\s*6px/s);
+  assert.match(css, /\.tag-selector-item::after\s*\{[^}]*inset:\s*1\.5px 2px/s);
   assert.doesNotMatch(css, /tags-box|\.zotero-box-label/);
 });
 
