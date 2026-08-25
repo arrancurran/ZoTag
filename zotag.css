@@ -1,30 +1,47 @@
 /* Papers-inspired chips for Zotero's library tag selector (bottom-left pane). */
 #zotero-tag-selector .tag-selector-list .tag-selector-item {
-  background-color: #e1e6ea !important;
+  background-color: transparent !important;
   border-radius: 7px;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.015);
+  isolation: isolate;
   transition:
-    background-color 120ms ease,
     box-shadow 120ms ease;
 }
 
-#zotero-tag-selector .tag-selector-list .tag-selector-item:hover:not(.disabled) {
-  background-color: #d2d9df !important;
+#zotero-tag-selector .tag-selector-list .tag-selector-item::after {
+  background-color: #e1e6ea;
+  border-radius: 7px;
+  content: "";
+  inset: 1px 2px;
+  position: absolute;
+  transition:
+    background-color 120ms ease,
+    box-shadow 120ms ease;
+  z-index: -1;
+}
+
+#zotero-tag-selector .tag-selector-list .tag-selector-item:hover:not(.disabled)::after {
+  background-color: #d2d9df;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.035);
 }
 
-#zotero-tag-selector .tag-selector-list .tag-selector-item:active:not(.disabled) {
-  background-color: #c8d0d7 !important;
+#zotero-tag-selector .tag-selector-list .tag-selector-item:active:not(.disabled)::after {
+  background-color: #c8d0d7;
 }
 
 /* Keep selected filters clear without replacing a tag's colored identity dot. */
 #zotero-tag-selector .tag-selector-list .tag-selector-item.selected {
-  background-color: #b7c1c9 !important;
   color: var(--fill-primary) !important;
 }
 
+#zotero-tag-selector .tag-selector-list .tag-selector-item.selected::after {
+  background-color: #b7c1c9;
+}
+
+#zotero-tag-selector .tag-selector-list .tag-selector-item.selected:hover::after {
+  background-color: #aab5be;
+}
+
 #zotero-tag-selector .tag-selector-list .tag-selector-item.selected:hover {
-  background-color: #aab5be !important;
   opacity: 1;
 }
 
@@ -33,24 +50,24 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  #zotero-tag-selector .tag-selector-list .tag-selector-item {
-    background-color: #3b4147 !important;
+  #zotero-tag-selector .tag-selector-list .tag-selector-item::after {
+    background-color: #3b4147;
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.025);
   }
 
-  #zotero-tag-selector .tag-selector-list .tag-selector-item:hover:not(.disabled) {
-    background-color: #4a525a !important;
+  #zotero-tag-selector .tag-selector-list .tag-selector-item:hover:not(.disabled)::after {
+    background-color: #4a525a;
   }
 
-  #zotero-tag-selector .tag-selector-list .tag-selector-item:active:not(.disabled) {
-    background-color: #565f68 !important;
+  #zotero-tag-selector .tag-selector-list .tag-selector-item:active:not(.disabled)::after {
+    background-color: #565f68;
   }
 
-  #zotero-tag-selector .tag-selector-list .tag-selector-item.selected {
-    background-color: #626d77 !important;
+  #zotero-tag-selector .tag-selector-list .tag-selector-item.selected::after {
+    background-color: #626d77;
   }
 
-  #zotero-tag-selector .tag-selector-list .tag-selector-item.selected:hover {
-    background-color: #707c87 !important;
+  #zotero-tag-selector .tag-selector-list .tag-selector-item.selected:hover::after {
+    background-color: #707c87;
   }
 }

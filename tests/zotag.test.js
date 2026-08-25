@@ -23,7 +23,7 @@ test("injects one scoped stylesheet and removes it cleanly", () => {
     }
   };
   const window = { document };
-  ZoTag.init({ rootURI: "file:///zotag/", version: "1.0.7" });
+  ZoTag.init({ rootURI: "file:///zotag/", version: "1.0.8" });
   ZoTag.addToWindow(window);
   ZoTag.addToWindow(window);
 
@@ -31,7 +31,7 @@ test("injects one scoped stylesheet and removes it cleanly", () => {
   const stylesheet = nodes.get("zotag-chip-styles");
   assert.equal(stylesheet.tag, "link");
   assert.equal(stylesheet.rel, "stylesheet");
-  assert.equal(stylesheet.href, "file:///zotag/zotag.css?v=1.0.7");
+  assert.equal(stylesheet.href, "file:///zotag/zotag.css?v=1.0.8");
 
   ZoTag.removeFromWindow(window);
   assert.equal(nodes.size, 0);
@@ -48,15 +48,16 @@ test("cache-busts the stylesheet URL with the installed version", () => {
 test("styles the library tag selector as shaded chips", () => {
   const css = fs.readFileSync("zotag.css", "utf8");
   assert.match(css, /#zotero-tag-selector \.tag-selector-list \.tag-selector-item\s*\{/);
-  assert.match(css, /\.tag-selector-item\s*\{[^}]*background-color:\s*#e1e6ea\s*!important/s);
+  assert.match(css, /\.tag-selector-item::after\s*\{[^}]*background-color:\s*#e1e6ea/s);
   assert.match(css, /\.tag-selector-item\s*\{[^}]*border-radius:\s*7px/s);
+  assert.match(css, /\.tag-selector-item::after\s*\{[^}]*inset:\s*1px 2px/s);
   assert.doesNotMatch(css, /tags-box|\.zotero-box-label/);
 });
 
 test("darkens chips on hover and preserves colored-tag identity", () => {
   const css = fs.readFileSync("zotag.css", "utf8");
-  assert.match(css, /\.tag-selector-item:hover:not\(\.disabled\)\s*\{[^}]*background-color:\s*#d2d9df\s*!important/s);
-  assert.match(css, /\.tag-selector-item\.selected\s*\{[^}]*background-color:/s);
+  assert.match(css, /\.tag-selector-item:hover:not\(\.disabled\)::after\s*\{[^}]*background-color:\s*#d2d9df/s);
+  assert.match(css, /\.tag-selector-item\.selected::after\s*\{[^}]*background-color:/s);
   assert.match(css, /prefers-color-scheme:\s*dark/);
   assert.doesNotMatch(css, /\.colored[^}]*display:\s*none/s);
 });
