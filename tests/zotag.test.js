@@ -50,12 +50,12 @@ test("styles tag rows as spaced, wrapping chips", () => {
   assert.match(css, /tags-box \.body \.tags-box-list\s*\{[^}]*flex-wrap:\s*wrap/s);
   assert.match(css, /tags-box \.body \.tags-box-list\s*\{[^}]*gap:\s*8px/s);
   assert.match(css, /tags-box \.body \.row\s*\{[^}]*border-radius:\s*8px/s);
-  assert.match(css, /tags-box \.body \.row\s*\{[^}]*background-color:\s*#e1e6ea\s*!important/s);
+  assert.match(css, /tags-box \.body \.row\s*\{[^}]*background-color:\s*#067cdc\s*!important/s);
 });
 
 test("darkens chips on hover and preserves colored-tag identity", () => {
   const css = fs.readFileSync("zotag.css", "utf8");
-  assert.match(css, /\.row\s*\{[^}]*background-color:\s*#e1e6ea\s*!important/s);
+  assert.match(css, /\.row\s*\{[^}]*background-color:\s*#067cdc\s*!important/s);
   assert.match(css, /\.row:is\(:hover, :focus-within\)\s*\{[^}]*background-color:\s*#d2d9df\s*!important/s);
   assert.match(css, /prefers-color-scheme:\s*dark/);
   assert.match(css, /\.row\s*\{[^}]*transition:\s*background-color 120ms ease/s);
