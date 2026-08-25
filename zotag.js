@@ -2,10 +2,10 @@ var ZoTag = (() => {
   "use strict";
 
   const STYLE_ID = "zotag-chip-styles";
-  let rootURI;
+  let stylesheetURL;
 
   function init(options) {
-    rootURI = options.rootURI;
+    stylesheetURL = options.rootURI + "zotag.css?v=" + encodeURIComponent(options.version || "dev");
   }
 
   function addToWindow(window) {
@@ -16,7 +16,7 @@ var ZoTag = (() => {
     stylesheet.id = STYLE_ID;
     stylesheet.rel = "stylesheet";
     stylesheet.type = "text/css";
-    stylesheet.href = rootURI + "zotag.css";
+    stylesheet.href = stylesheetURL;
     doc.documentElement.appendChild(stylesheet);
   }
 

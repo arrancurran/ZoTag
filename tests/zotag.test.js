@@ -23,7 +23,7 @@ test("injects one scoped stylesheet and removes it cleanly", () => {
     }
   };
   const window = { document };
-  ZoTag.init({ rootURI: "file:///zotag/" });
+  ZoTag.init({ rootURI: "file:///zotag/", version: "1.0.3" });
   ZoTag.addToWindow(window);
   ZoTag.addToWindow(window);
 
@@ -31,10 +31,18 @@ test("injects one scoped stylesheet and removes it cleanly", () => {
   const stylesheet = nodes.get("zotag-chip-styles");
   assert.equal(stylesheet.tag, "link");
   assert.equal(stylesheet.rel, "stylesheet");
-  assert.equal(stylesheet.href, "file:///zotag/zotag.css");
+  assert.equal(stylesheet.href, "file:///zotag/zotag.css?v=1.0.3");
 
   ZoTag.removeFromWindow(window);
   assert.equal(nodes.size, 0);
+});
+
+test("cache-busts the stylesheet URL with the installed version", () => {
+  const bootstrap = fs.readFileSync("bootstrap.js", "utf8");
+  const script = fs.readFileSync("zotag.js", "utf8");
+  assert.match(bootstrap, /startup\(\{ version, rootURI \}\)/);
+  assert.match(bootstrap, /ZoTag\.init\(\{ rootURI, version \}\)/);
+  assert.match(script, /zotag\.css\?v=/);
 });
 
 test("styles tag rows as spaced, wrapping chips", () => {

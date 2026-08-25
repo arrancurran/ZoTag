@@ -8,10 +8,10 @@ function install() {
   log("Installed");
 }
 
-async function startup({ rootURI }) {
+async function startup({ version, rootURI }) {
   await Zotero.initializationPromise;
   Services.scriptloader.loadSubScript(rootURI + "zotag.js");
-  ZoTag.init({ rootURI });
+  ZoTag.init({ rootURI, version });
   ZoTag.addToAllWindows();
   log("Started");
 }
